@@ -1,18 +1,3 @@
-# rl_envs
-
-rl environments
-
-# install
-
-requires : gym, numpy, cv2
-
-```bash
-pip3 install -e .
-```
-
-**usage**
-
-```python
 import RLEnvs
 import time
 import numpy
@@ -49,17 +34,3 @@ while True:
 
     #render env ID=0
     env.render(0)
-
-```
-
-
-# environments 
-
-## rooms
-
-fast parallel rooms exploring env
-
-![image](doc/rooms.gif)
-
-- observation : envs_count, 3, 16, 16 (set of RGB images)
-- action      : 5 : 4 for move, 1 do nothig
