@@ -138,19 +138,18 @@ class RoomsEnv:
         d_position+= [0, 1]*(actions == 3)
         d_position+= [0, -1]*(actions == 4)
 
-        ry = self.positions[0][0]//self.size
-        rx = self.positions[0][1]//self.size
+        positions_new = numpy.clip(self.positions + d_position, 0, self.size*self.grid_size-1)
 
         for e in range(self.envs_count):
-            ry = self.positions[e][0]//self.size
-            rx = self.positions[e][1]//self.size
+            ry = positions_new[e][0]//self.size
+            rx = positions_new[e][1]//self.size
 
             if self.explored[e][ry][rx] == False:
                 self.maps[e][ry][rx] = self.maps_initial[e][ry][rx].copy()
             else:
                 self.maps[e][ry][rx] = 1.0 - self.maps_initial[e][ry][rx].copy()
 
-        self.positions = numpy.clip(self.positions + d_position, 0, self.size*self.grid_size-1)
+        self.positions = positions_new
 
         max_steps = 4*self.size*self.grid_size*self.grid_size
         
