@@ -1,18 +1,3 @@
-# rl_envs
-
-rl environments
-
-# install
-
-requires : gym, numpy, cv2
-
-```bash
-pip3 install -e .
-```
-
-**usage**
-
-```python
 import RLEnvs
 import time
 import numpy
@@ -20,7 +5,7 @@ import numpy
 envs_count = 128
 
 #create parallel envs
-env             = RLEnvs.RoomsEnv(envs_count = envs_count)
+env             = RLEnvs.TunnelEnv(envs_count = envs_count)
 
 #actions count
 actions_count   = env.action_space.n
@@ -49,27 +34,3 @@ while True:
 
     #render env ID=0
     env.render(0)
-
-```
-
-
-# environments 
-
-## rooms
-
-fast parallel rooms exploring env
-
-![image](doc/rooms.gif)
-
-- observation : envs_count, 3, 16, 16 (set of RGB images)
-- action      : 5 : 4 for move, 1 do nothig
-
-
-## tunnel
-
-deadly tunnel, reward is on its end
-
-![image](doc/tunnel.gif)
-
-- observation : envs_count, 2 : positionof agent, normalised into (0, 1)
-- action      : 5 : 4 for move, 1 do nothig
