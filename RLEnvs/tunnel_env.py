@@ -20,16 +20,11 @@ class TunnelEnv:
             self.tunnel[0][i]              = -1.0
             self.tunnel[self.height-1][i]  = -1.0
 
-            if i > 0:
-                if i%obstacles_period == obstacles_period//2:
-                    self.tunnel[1][i] = -1.0
-                    self.tunnel[2][i] = -1.0
-                    self.tunnel[3][i] = -1.0
-                elif i%obstacles_period == 0:
-                    self.tunnel[3][i] = -1.0
-                    self.tunnel[4][i] = -1.0
-                    self.tunnel[5][i] = -1.0
-
+            if i == size//2:
+                self.tunnel[1][i] = -1.0
+                self.tunnel[2][i] = -1.0
+                self.tunnel[3][i] = -1.0
+                
         self.tunnel[self.height//2][size-1] = 1.0
 
 
