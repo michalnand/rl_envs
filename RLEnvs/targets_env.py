@@ -4,7 +4,7 @@ import cv2
 
 class TargetsEnv:
  
-    def __init__(self, envs_count = 128, size = 16):
+    def __init__(self, envs_count = 128, size = 32):
         self.envs_count     = envs_count 
         self.size           = size
 
@@ -133,7 +133,7 @@ class TargetsEnv:
 
 if __name__ == "__main__":
     envs_count = 128
-    envs = TargetsEnv(envs_count, 16)
+    envs = TargetsEnv(envs_count, 32)
 
     obs = envs.reset()
     print("obs_shape = ", obs.shape)
