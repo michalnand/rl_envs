@@ -126,7 +126,7 @@ class TargetsEnv:
             y = self.positions_y[e]
             x = self.positions_x[e]
 
-            observations[e][0][y][x] = 2.0
+            observations[e][0][y][x] = 0.5
     
         return observations
 
