@@ -94,11 +94,11 @@ class TargetsEnv:
 
         eps             = 0.0000001
 
-        targets_probs   = self.target_reached/(self.target_reached.sum() + eps)
+        targets_probs   = (self.target_reached + eps)/(self.target_reached.sum() + eps)
         targets_entropy = (-targets_probs*numpy.log(targets_probs + eps)).sum()
         
-        visited_probs   = self.fields_visited/(self.fields_visited.sum() + eps)
-        visited_entropy = (-visited_probs*numpy.log(visited_probs + eps)).sum()
+        visited_probs   = (self.fields_visited + eps)/(self.fields_visited.sum() + eps)
+        visited_entropy = (-visited_probs*numpy.log(visited_probs)).sum()
 
         info   = {}
         info["targets_probs"]   = targets_probs
