@@ -19,6 +19,7 @@ class TargetsEnv:
         self.map[self.size -1][self.size -1]    = 1.0
 
         self.target_reached = numpy.zeros(4, dtype=numpy.int)
+        self.fields_visited = numpy.zeros((self.size, self.size), dtype=numpy.int)
         
         self.reset()
 
@@ -89,8 +90,24 @@ class TargetsEnv:
             elif self.steps[e] > 4*self.size:
                 dones[e]       = True
 
-        probs = self.target_reached/(self.target_reached.sum() + 0.0000001)
-        infos = numpy.repeat(numpy.expand_dims(probs, 0), self.envs_count, axis=0)
+            self.fields_visited[y][y]+= 1
+
+        eps             = 0.0000001
+
+        targets_probs   = self.target_reached/(self.target_reached.sum() + eps)
+        targets_entropy = (-targets_probs*numpy.log(targets_probs + eps)).sum()
+        
+        visited_probs   = self.fields_visited/(self.fields_visited.sum() + eps)
+        visited_entropy = (-visited_probs*numpy.log(visited_probs + eps)).sum()
+
+        info   = {}
+        info["targets_probs"]   = targets_probs
+        info["targets_entropy"] = targets_entropy
+        info["visited_entropy"] = visited_entropy
+
+
+        infos   = []
+        infos.append(info)
 
         return self._update_observations(), rewards, dones, infos
 
