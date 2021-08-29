@@ -73,7 +73,7 @@ class TargetsWallEnv:
 
             #step on wall
             if self.map[y][x] < 0.0:
-                rewards[e] = -0.0
+                rewards[e] = -0.1
 
             #one of targets reached
             elif self.map[y][x] > 0.999:
