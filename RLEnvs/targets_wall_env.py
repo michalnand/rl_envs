@@ -16,7 +16,7 @@ class TargetsWallEnv:
         self.map[0][0]                          = 1.0
 
         for i in range(self.size):
-            self.map[i][self.size//2]       = -1.0
+            self.map[i][self.size//2]       = 0.2
 
         self.map[self.size -1][self.size -1]    = 1.0
 
@@ -72,7 +72,7 @@ class TargetsWallEnv:
 
 
             #step on wall
-            if self.map[y][x] < 0.0:
+            if ((self.map[y][x] - 0.2)**2) < 0.001:
                 rewards[e] = -0.1
 
             #one of targets reached
@@ -163,9 +163,8 @@ if __name__ == "__main__":
         actions = numpy.random.randint(0, 5, envs_count)
         obs, reward, done, info = envs.step(actions)
 
-        if reward[0] > 0:
-            envs.render()
-            print(reward[0])
+        envs.render()
+        print(reward[0])
 
         for e in range(envs_count):
             if done[e]:
