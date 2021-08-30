@@ -114,8 +114,8 @@ class TargetsWallEnv:
     def render(self, env_id = 0):       
         image = numpy.zeros((3, self.size, self.size))
 
-        image[2]        = self.map > 0.0
-        image[0]        = self.map < 0.0
+        image[2]        = self.map == 1.0
+        image[0]        = self.map == 0.2
 
         y = self.positions_y[env_id]
         x = self.positions_x[env_id]
