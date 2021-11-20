@@ -17,6 +17,8 @@ class RoomsExploreEnv:
 
         self.map_initial, self.points = self._create_map()
 
+        self.explored_rooms = 0
+
         self.reset()
 
     def _create_map(self):
@@ -88,7 +90,7 @@ class RoomsExploreEnv:
     def step(self, actions):
         rewards = numpy.zeros(self.envs_count, dtype=numpy.float32)
         dones   = numpy.zeros(self.envs_count, dtype=bool)
-        infos   = numpy.zeros(self.envs_count, dtype=int)
+        infos   = []
 
         self.steps+= 1
 
@@ -127,6 +129,14 @@ class RoomsExploreEnv:
             #max steps reached
             if self.steps[e] >= max_steps:
                 dones[e] = True
+
+            if self.score_sum[e] > self.explored_rooms
+                self.explored_rooms = int(self.score_sum[e])
+
+            info = {}
+            info["room_id"]         = ry*self.grid_size + rx
+            info["explored_rooms"]  = self.explored_rooms
+            infos.append(info)
 
         return self._update_observations(), rewards, dones, infos
 
