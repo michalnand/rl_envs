@@ -14,10 +14,12 @@ class RoomsExploreEnv:
         self.action_space 	    = gym.spaces.Discrete(5)
 
         self._random_seed = 0
+        
 
         self.map_initial, self.points = self._create_map()
 
-        self.explored_rooms = 0
+        self.visiting_counts    = numpy.zeros(self.grid_size*self.grid_size, dtype=int)
+        self.explored_rooms     = 0
 
         self.reset()
 
@@ -133,9 +135,17 @@ class RoomsExploreEnv:
             if self.score_sum[e] > self.explored_rooms:
                 self.explored_rooms = int(self.score_sum[e])
 
+
+            room_id = ry*self.grid_size + rx
+            self.visiting_counts[room_id]+= 1
+
+            visiting_stats = self.visiting_counts/self.visiting_counts.sum()
+            visiting_stats = numpy.around(visiting_stats, decimals=3)
+
             info = {}
-            info["room_id"]         = ry*self.grid_size + rx
-            info["explored_rooms"]  = self.explored_rooms
+            info["room_id"]                 = room_id
+            info["explored_rooms"]          = self.explored_rooms
+            info["rooms_visiting_stats"]    = visiting_stats
             infos.append(info)
 
         return self._update_observations(), rewards, dones, infos
