@@ -179,6 +179,7 @@ class RoomsExploreEnv:
             text = str(int(self.score_sum[e]))
             cv2.putText(text_print[e], text,(16,16), font, 1, (255,255,255), 1, cv2.LINE_AA)
 
+        text_print = text_print/256.0
 
         #upsample
         observations = numpy.repeat(observations, self.upscale, axis=2)
@@ -189,5 +190,7 @@ class RoomsExploreEnv:
             observations[e][0]+= text_print[e].copy()
             observations[e][1]+= text_print[e].copy()
             observations[e][2]+= text_print[e].copy()
+
+        observations = numpy.clip(observations, 0.0, 1.0)
 
         return observations

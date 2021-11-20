@@ -25,12 +25,15 @@ while True:
 
     if dones[0]:
         print("fps = ", round(fps, 2), rewards[0], dones[0], env.steps[0], env.score_sum[0])
-        env.render(0)
+    
+    env.render(0) 
     
     #reset if done
     for i in range(len(dones)):
         if dones[i]:
             states = env.reset(i)
+
+    print(states.mean(), states.max(), states.min())
 
     #fps smoothing
     fps = (1.0 - k)*fps + k/(time_stop - time_start)
