@@ -144,7 +144,7 @@ class RoomsExploreEnv:
  
             info = {}
             info["room_id"]                 = room_id
-            info["explored_rooms"]          = numpy.sum(self.visiting_counts != 0)
+            info["explored_rooms"]          = numpy.sum(self.visiting_counts > 0)
             info["rooms_visiting_stats"]    = visiting_stats
             infos.append(info)
 
