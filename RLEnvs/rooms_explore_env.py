@@ -130,7 +130,7 @@ class RoomsExploreEnv:
             if self.steps[e] >= max_steps:
                 dones[e] = True
 
-            if self.score_sum[e] > self.explored_rooms
+            if self.score_sum[e] > self.explored_rooms:
                 self.explored_rooms = int(self.score_sum[e])
 
             info = {}
