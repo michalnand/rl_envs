@@ -141,10 +141,10 @@ class RoomsExploreEnv:
 
             visiting_stats = self.visiting_counts/self.visiting_counts.sum()
             visiting_stats = numpy.around(visiting_stats, decimals=3)
-
+ 
             info = {}
             info["room_id"]                 = room_id
-            info["explored_rooms"]          = self.explored_rooms
+            info["explored_rooms"]          = numpy.sum(self.visiting_counts != 0)
             info["rooms_visiting_stats"]    = visiting_stats
             infos.append(info)
 
